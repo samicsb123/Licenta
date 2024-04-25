@@ -1,19 +1,31 @@
 /* Stiluri pentru navbar */
 .navbar {
     background-color: #333; /* Culoarea de fundal a barei de navigare */
-    overflow: hidden;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 70px;
 }
+.separator{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.separator-right{
+    justify-content: right;
 
+}
+.separator-left{
+    justify-content: space-around;
+    width: 50%;
+}
 /* Stiluri pentru nume */
 .navbar .logo-text {
     color: #fff; /* Culoarea textului */
     font-size: 24px;
     font-weight: bold;
+    padding: 0;
 }
 
 /* Stiluri pentru searchbar */
@@ -22,7 +34,7 @@
     border: none;
     border-radius: 5px;
     margin-right: 10px;
-    width: 200px;
+    width: 50%;
 }
 
 /* Stiluri pentru butoanele de notificări și profil */
@@ -31,6 +43,7 @@
     font-size: 24px; /* Dimensiunea iconurilor */
     color: #fff; /* Culoarea iconurilor */
     margin-right: 10px; /* Spațiu între iconuri */
+    padding-right: 20px;
 }
 
 /* Stiluri pentru butonul de profil */
