@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 import sqlite3
 
 app = Flask(__name__)
@@ -7,6 +7,9 @@ app.secret_key = 'Drivqsy12'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = "login"
+
+
 
 class User(UserMixin):
     def __init__(self, id):
@@ -32,9 +35,28 @@ def check_login(email, password):
 
 
 # Funcție pentru adăugarea unui nou cont în baza de date
+
 def create_account(email, name, password):
-    # Implementează această funcție pentru a adăuga un nou cont în baza de date sau în sistemul tău
-    pass
+    conn = sqlite3.connect('movie_app.db')  # Conectează-te la baza de date
+    cursor = conn.cursor()
+
+    # Definește instrucțiunea SQL pentru inserarea unui nou cont în tabelul 'accounts'
+    insert_query = "INSERT INTO accounts (email, name, password) VALUES (?, ?, ?)"
+    user_data = (email, name, password)
+
+    try:
+        # Execută instrucțiunea SQL pentru a insera datele noului cont în tabel
+        cursor.execute(insert_query, user_data)
+        conn.commit()  # Salvează modificările în baza de date
+        print("Contul a fost creat cu succes!")
+    except sqlite3.Error as e:
+        print("Eroare la crearea contului:", e)
+    finally:
+        conn.close()  # Închide conexiunea cu baza de date
+
+# Exemplu de utilizare a funcției create_account
+create_account('example@example.com', 'John Doe', 'password123')
+
 
 @app.route('/')
 def index():
