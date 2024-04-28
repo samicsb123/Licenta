@@ -1,24 +1,36 @@
-import sqlite3
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 
-# Conectează-te la baza de date sau creează-o dacă nu există
-conn = sqlite3.connect('movie_app.db')
-cursor = conn.cursor()
+db = SQLAlchemy()
 
-# Definește schema (sablonul) bazei de date
-create_table_query = """
-CREATE TABLE IF NOT EXISTS accounts (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT UNIQUE NOT NULL,
-    name TEXT NOT NULL,
-    password TEXT NOT NULL
-);
-"""
+class User(db.Model, UserMixin):
+    __tablename__ = 'user'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    name = db.Column(db.String(120), nullable=False)
+    password = db.Column(db.String(120), nullable=False)
 
-# Execută instrucțiunea SQL pentru a crea tabela
-cursor.execute(create_table_query)
+    # Metodele necesare pentru Flask-Login
+    def is_authenticated(self):
+        return True
 
-# Salvează schimbările și închide conexiunea cu baza de date
-conn.commit()
-conn.close()
+    def is_active(self):
+        return True
 
-print("Baza de date și tabela au fost create cu succes!")
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)
+
+def init_app_and_db(app):
+    # Configurăm baza de date
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movie_app.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    # Inițializăm baza de date cu aplicația
+    db.init_app(app)
+
+    # Creăm tabelele în baza de date (nu e necesar dacă folosim migrări SQLAlchemy)
+    with app.app_context():
+        db.create_all()
