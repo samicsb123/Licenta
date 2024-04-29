@@ -53,6 +53,7 @@
     background-color: #fff; /* Culoarea de fundal a butonului de profil */
     border-radius: 50%; /* Pentru a face butonul rotund */
     margin-right: 5px; /* Spațiu între butonul de profil și cel de notificări */
+    border: 0px;
 }
 
 /* Stiluri pentru meniul dropdown */
