@@ -16,7 +16,8 @@ init_app_and_db(app)
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
+    return db.session.get(User, user_id)
+
 
 def check_login(email, password):
     user = User.query.filter_by(email=email, password=password).first()
@@ -74,7 +75,6 @@ def signup():
 
 @app.route('/home')
 @login_required
-# FA AICI POST METHOD ( cred ca asta e problema ca ma lasa sa accesez pag fara cont)
 def home():
     return render_template('home.html')
 

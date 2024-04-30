@@ -1,6 +1,13 @@
 /* Stiluri pentru navbar */
+
+/* #310e69 */
+
+:root{
+    --primary-color:#000000;
+    --secondary-color: #df121c;
+}
 .navbar {
-    background-color: #333; /* Culoarea de fundal a barei de navigare */
+    background-color: var(--secondary-color); /* Culoarea de fundal a barei de navigare */
     padding: 10px;
     display: flex;
     justify-content: space-between;
