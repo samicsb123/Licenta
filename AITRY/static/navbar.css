@@ -1,13 +1,7 @@
-/* Stiluri pentru navbar */
 
-/* #310e69 */
 
-:root{
-    --primary-color:#000000;
-    --secondary-color: #df121c;
-}
 .navbar {
-    background-color: var(--secondary-color); /* Culoarea de fundal a barei de navigare */
+    background-color: #310e69;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -24,18 +18,19 @@
 
 }
 .separator-left{
-    justify-content: space-around;
+    margin-left: 0px;
+    justify-content: space-between;
     width: 50%;
+    
 }
-/* Stiluri pentru nume */
+
 .navbar .logo-text {
-    color: #fff; /* Culoarea textului */
+    color: #fff; 
     font-size: 24px;
     font-weight: bold;
     padding: 0;
 }
 
-/* Stiluri pentru searchbar */
 .navbar input[type="text"] {
     padding: 10px;
     border: none;
@@ -44,30 +39,30 @@
     width: 50%;
 }
 
-/* Stiluri pentru butoanele de notificări și profil */
+
 .navbar .notification-icon,
 .navbar .profile-icon {
-    font-size: 24px; /* Dimensiunea iconurilor */
-    color: #fff; /* Culoarea iconurilor */
-    margin-right: 10px; /* Spațiu între iconuri */
+    font-size: 24px; 
+    color: #fff; 
+    margin-right: 10px; 
     padding-right: 20px;
 }
 
-/* Stiluri pentru butonul de profil */
+
 .navbar .profile-icon {
-    width: 30px; /* Dimensiunea butonului de profil */
+    width: 30px; 
     height: 30px;
-    background-color: #fff; /* Culoarea de fundal a butonului de profil */
-    border-radius: 50%; /* Pentru a face butonul rotund */
-    margin-right: 5px; /* Spațiu între butonul de profil și cel de notificări */
+    background-color: #fff; 
+    border-radius: 50%; 
+    margin-right: 5px; 
     border: 0px;
 }
 
-/* Stiluri pentru meniul dropdown */
+
 .dropdown-menu {
-    /* Alte stiluri */
-    max-height: 200px; /* Limităm înălțimea meniului dropdown */
-    overflow-y: auto; /* Adăugăm scroll pentru cazul în care meniul este mai lung */
+
+    max-height: 200px; 
+    overflow-y: auto;
     position: absolute;
     z-index: 1000;
 }
@@ -75,4 +70,57 @@
 .dropdown {
     position: relative;
     z-index: 1001;
+}
+
+
+.OASIS-button{
+    color: rgb(177, 25, 25);
+    font-weight: bold; 
+    font-size: 24px;
+}
+
+.OASIS-button:hover{
+    color: rgb(177, 25, 25);
+    font-weight: bold; 
+    font-size: 24px;
+    text-decoration: none;
+}
+
+*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.text-navbar{
+    color: rgb(177, 25, 25);
+    position: relative;
+    text-decoration: none;
+    font-size: 24px;
+    letter-spacing: 0.5px;
+    font-family: 'Poppins',sans-serif;
+    padding-right: 10px;
+}
+
+.text-navbar:hover{
+    color: rgb(177, 25, 25);;
+    text-decoration: none;
+}
+
+.text-navbar::after{
+    content: "";
+    position: absolute;
+    background-color: rgb(177, 25, 25);
+    height: 3px;
+    width: 0;
+    left: 0;
+    bottom: -10px;
+    transition: 0.3s;
+}
+
+.text-navbar:hover::after{
+    width: 100%;
+
 }

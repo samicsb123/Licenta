@@ -86,5 +86,15 @@ def logout():
     flash('You were successfully logged out!', 'success')
     return redirect(url_for('index'))
 
+@app.route('/series', methods=['GET','POST'])
+@login_required
+def series():
+    session.pop('logged_in', None)
+    return render_template('series.html')
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
+

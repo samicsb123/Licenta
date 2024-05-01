@@ -15,7 +15,16 @@
 <body>
     <div class="navbar">
         <div class="separator separator-left">
-            <h2 class="logo-text">OASIS</h2>
+            <div>
+                <a class="OASIS-button" href="{{url_for('home')}}">OASIS</a>
+            </div>
+            <div>
+                <a class="text-navbar" href="{{url_for('series')}}">Series</a>
+            </div>
+            <div>
+                <a class="text-navbar" href="{{url_for('series')}}">movies</a>
+            </div>
+            
             <input class="search-input" type="text" placeholder="Search...">
         </div>
         <div class="separator separator-right">
@@ -50,28 +59,7 @@
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum at architecto id, incidunt nobis sequi impedit dolore commodi natus officiis magnam similique distinctio autem non quo quidem voluptate culpa vero.
             </div>
         </div>
-        <div class="movie">
-            <img src="../img/Dune.jpg
-            alt="Image">
-            <div class="movie-info">
-                <h3>Movie Title</h3>
-                <span class="green">9.8</span>
-            </div>
-            <div class="overview">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum at architecto id, incidunt nobis sequi impedit dolore commodi natus officiis magnam similique distinctio autem non quo quidem voluptate culpa vero.
-            </div>
-        </div>
-        <div class="movie">
-            <img src="../img/Dune.jpg
-            alt="Image">
-            <div class="movie-info">
-                <h3>Movie Title</h3>
-                <span class="green">9.8</span>
-            </div>
-            <div class="overview">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum at architecto id, incidunt nobis sequi impedit dolore commodi natus officiis magnam similique distinctio autem non quo quidem voluptate culpa vero.
-            </div>
-        </div>
+
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

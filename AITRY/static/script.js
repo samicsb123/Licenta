@@ -3,14 +3,17 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&'+ API_KEY;
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const searchURL = BASE_URL + '/search/movie?'+ API_KEY;
-const popularURL = BASE_URL + "/movie/popular?language=en-US&page=1&" + API_KEY;
+const popularMovies = BASE_URL + "/movie/popular?language=en-US&page=1&" + API_KEY;
+const popularSeries = BASE_URL+"tv/popular?language=en-US&page=1&" +API_KEY;
 
-
+const form = document.getElementById('form');
 const main = document.getElementById('main');
+const search =document.getElementById('search-input');
 
-getMovies(popularURL);
+getData(popularMovies);
+getData(popularSeries);
 
-function getMovies(url) {
+function getData(url) {
     fetch(url)
         .then(res => res.json()) 
         .then(data => {
@@ -55,3 +58,4 @@ function getColor(vote) {
         return 'red'
     }
 }
+
