@@ -5,9 +5,10 @@
 }
 
 :root{
-    --primary-color:#000000;
-    --secondary-color: #310e69;
+    --primary-color:#22254b;
+    --secondary-color: #373b69;
 }
+
 
 body{
     background-color: var(--primary-color);

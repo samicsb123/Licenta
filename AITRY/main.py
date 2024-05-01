@@ -93,6 +93,13 @@ def series():
     return render_template('series.html')
 
 
+@app.route('/movies', methods=['GET','POST'])
+@login_required
+def movies():
+    session.pop('logged_in', None)
+    return render_template('movies.html')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
