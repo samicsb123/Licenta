@@ -96,7 +96,7 @@ main{
     color:red;
 }
 
-.overview{
+/* .overview{
     position:absolute;
     left:0;
     right:0;
@@ -110,7 +110,7 @@ main{
 
 .movie:hover .overview{
     transform:translateY(0)
-}
+} */
 
 #tags{
     width:80%;

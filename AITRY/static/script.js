@@ -12,12 +12,12 @@ const search =document.getElementById('search-input');
 
 
 
-if (document.title === "OASIS - Movies") {
+
+  if (document.title === "OASIS - Movies") {
     getData(popularMovies);
 } else if (document.title === "OASIS - Series") {
     getData(popularSeries);
 }
-
 
 function getData(url) {
     fetch(url)
@@ -25,59 +25,30 @@ function getData(url) {
         .then(data => {
             console.log(data);
             showMovies(data.results);
+        
+            
         })
         .catch(error => console.error('Eroare în timpul cererii fetch:', error));
 }
 function showMovies(data) {
     main.innerHTML = '';
 
-    data.forEach(movie => {
-        const {title, poster_path, vote_average, overview} = movie;
+    data.forEach(item => {
+        // Verificăm dacă obiectul dat este film sau serial
+        const title = item.title || item.name; // Extragem titlul din "title" sau "name"
+        const poster_path = item.poster_path;
+        const vote_average = item.vote_average.toFixed(2);
+
         const movieEl = document.createElement('div');
-        
         movieEl.classList.add('movie');
+
         movieEl.innerHTML = `
             <img src="${IMG_URL + poster_path}" alt="${title}">
-
             <div class="movie-info">
                 <h3>${title}</h3>
-                <span class="${getColor(vote_average)}">${vote_average}
-                </span>
+                <span class="${getColor(vote_average)}">${vote_average}</span>
             </div>
-
-            <div class="overview">
-                <h3>Overview</h3>
-                ${overview}
-            </div>
-        `
-
-        main.appendChild(movieEl);
-    });
-}
-
-
-function showSeries(data) {
-    main.innerHTML = '';
-
-    data.forEach(series => {
-        const {name, poster_path, vote_average, overview} = movie;
-        const movieEl = document.createElement('div');
-        
-        movieEl.classList.add('series');
-        movieEl.innerHTML = `
-            <img src="${IMG_URL + poster_path}" alt="${title}">
-
-            <div class="movie-info">
-                <h3>${name}</h3>
-                <span class="${getColor(vote_average)}">${vote_average}
-                </span>
-            </div>
-
-            <div class="overview">
-                <h3>Overview</h3>
-                ${overview}
-            </div>
-        `
+        `;
 
         main.appendChild(movieEl);
     });
@@ -93,4 +64,5 @@ function getColor(vote) {
         return 'red'
     }
 }
+
 
