@@ -100,6 +100,10 @@ button {
 button:hover {
     background-color: #ff3c47; 
 }
+.movie {
+    cursor: pointer;
+}
+
 
 .signup-text {
     color:#e50914;
