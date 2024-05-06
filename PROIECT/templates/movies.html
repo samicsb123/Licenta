@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OASIS - Movies</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="static/navbar.css">
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="static/home.css">
+
+
+</head>
+<body>
+    <div class="navbar">
+        <div class="separator separator-left">
+            <div>
+                <a class="OASIS-button" href="{{url_for('home')}}">OASIS</a>
+            </div>
+            <div>
+                <a class="text-navbar" href="{{url_for('series')}}">Series</a>
+            </div>
+            <div>
+                <a class="text-navbar" href="{{url_for('movies')}}">Movies</a>
+            </div>
+            <input class="search-input" type="text" placeholder="Search...">
+        </div>
+        <div class="separator separator-right">
+            <a class="notification-icon">
+                <i class="fa fa-bell"></i>
+            </a>
+            <div class="dropdown">
+                <button class="profile-icon dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="/img/user.png" alt="Profile Dropdown" class="dropdown-img">
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Account</a>
+                    <a class="dropdown-item" href="#">Favorite</a>
+                    <a class="dropdown-item" href="{{ url_for('logout') }}">Log out</a>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="header-pag">
+        Movies
+    </div>
+    <div id="tags"></div>
+
+    <main id="main">
+
+        <div class="movie">
+            <img src="/img/Dune.jpg
+            alt="Image">
+            <div class="movie-info">
+                <h3>Movie Title</h3>
+                <span class="green">9.8</span>
+            </div>
+            <div class="overview">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum at architecto id, incidunt nobis sequi impedit dolore commodi natus officiis magnam similique distinctio autem non quo quidem voluptate culpa vero.
+            </div>
+        </div>
+
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
+    <script src="/static/script.js"></script>
+</body>
+</html>
