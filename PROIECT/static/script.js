@@ -7,7 +7,6 @@ const main = document.getElementById('main');
 
 
 
-// Funcția principală care obține datele și le afișează pe pagină
 function getData(url) {
     fetch(url)
         .then(res => res.json()) 
@@ -18,7 +17,6 @@ function getData(url) {
         .catch(error => console.error('Eroare în timpul cererii fetch:', error));
 }
 
-// Funcția care afișează filmele pe pagină
 function showMovies(data) {
     main.innerHTML = '';
 
@@ -53,21 +51,31 @@ function showMovies(data) {
     });
 }
 
-// Funcția pentru a obține detalii despre un film
 function fetchMovieDetails(id) {
     const movieDetailsURL = BASE_URL + '/movie/' + id + '?language=en-US&' + API_KEY;
+    const seriesDetailsURL = BASE_URL + '/tv/' + id + '?language=en-US&' + API_KEY;
+    if(document.title === 'OASIS - Movies'){
 
-    fetch(movieDetailsURL)
+        fetch(movieDetailsURL)
+            .then(response => response.json())
+            .then(movieData => {
+                console.log(movieData);
+
+            })
+            .catch(error => console.error('Eroare în timpul cererii fetch pentru detalii film:', error));
+    }
+    else if(document.title==='OASIS - Series'){
+        fetch(seriesDetailsURL)
         .then(response => response.json())
         .then(movieData => {
             console.log(movieData);
-            // Aici poți face orice cu datele obținute despre film (de exemplu, afișarea lor pe o pagină separată)
-            // În acest exemplu, afișăm doar detaliile filmului în consolă
+
         })
         .catch(error => console.error('Eroare în timpul cererii fetch pentru detalii film:', error));
+        
+    }
 }
 
-// Funcția care returnează culoarea corespunzătoare pentru scorul de evaluare
 function getColor(vote) {
     if (vote >= 8) {
         return 'green';
@@ -78,7 +86,6 @@ function getColor(vote) {
     }
 }
 
-// La început, afișăm lista principală de filme populare
 if (document.title === 'OASIS - Movies') {
     getData(popularMovies);
 } else if (document.title === 'OASIS - Series') {

@@ -10,7 +10,6 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(120), nullable=False)
     password = db.Column(db.String(120), nullable=False)
 
-    # Metodele necesare pentru Flask-Login
     def is_authenticated(self):
         return True
 
@@ -28,9 +27,7 @@ def init_app_and_db(app):
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movie_app.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # Inițializăm baza de date cu aplicația
     db.init_app(app)
 
-    # Creăm tabelele în baza de date (nu e necesar dacă folosim migrări SQLAlchemy)
     with app.app_context():
         db.create_all()

@@ -5,12 +5,10 @@ from models import init_app_and_db, User, db
 app = Flask(__name__)
 app.secret_key = 'Drivqsy12'
 
-# Inițializăm Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
-# Inițializăm aplicația și baza de date
 init_app_and_db(app)
 
 
@@ -24,7 +22,6 @@ def check_login(email, password):
     return user
 
 
-# Rutele
 @app.route('/')
 def index():
     return render_template('login.html')
