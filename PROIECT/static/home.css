@@ -71,6 +71,7 @@ main{
     justify-content: space-between;
     padding: 0.5rem 1rem 1rem;
     letter-spacing: 0.5px;
+    height: 110px;
 }
 
 .movie-info h3{
