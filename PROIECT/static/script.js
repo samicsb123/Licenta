@@ -1,10 +1,9 @@
-const API_KEY = 'api_key=0a1f889833a064b9203aead4fd549e03';
+const API_KEY = '&api_key=0a1f889833a064b9203aead4fd549e03';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
-const popularMovies = BASE_URL + '/movie/popular?language=en-US&page=1&' + API_KEY;
-const popularSeries = BASE_URL + '/tv/popular?language=en-US&page=1&' + API_KEY;
+const popularMovies = BASE_URL + '/movie/popular?language=en-US&page=1' + API_KEY;
+const popularSeries = BASE_URL + '/tv/popular?language=en-US&page=1' + API_KEY;
 const main = document.getElementById('main');
-
 
 
 function getData(url) {
@@ -91,3 +90,21 @@ if (document.title === 'OASIS - Movies') {
 } else if (document.title === 'OASIS - Series') {
     getData(popularSeries);
 }
+
+const searchInput = document.getElementById('search-input');
+// document.addEventListener('DOMContentLoaded', function() {
+//     // Selectăm inputul de căutare după ce întregul document a fost încărcat
+//     const searchInput = document.querySelector('.search-input');
+
+//     // Adăugăm ascultătorul de evenimente doar dacă inputul de căutare există
+//     if (searchInput) {
+//         searchInput.addEventListener('keydown', function(event) {
+//             if (event.keyCode === 13) {
+//                 const searchTerm = searchInput.value.trim();
+//                 const formattedSearchTerm = searchTerm.split(' ').join('%20');
+//                 const searchURL = BASE_URL + "/search/multi?query=" + formattedSearchTerm + '&' + API_KEY;
+//                 getData(searchURL);
+//             }}
+//         }
+       
+//     }

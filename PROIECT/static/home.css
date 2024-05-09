@@ -4,10 +4,11 @@
     box-sizing: border-box;
 }
 
-:root{
+ :root{
     --primary-color:#22254b;
     --secondary-color: #373b69;
-}
+} 
+
 
 
 body{
@@ -72,6 +73,7 @@ main{
     padding: 0.5rem 1rem 1rem;
     letter-spacing: 0.5px;
     height: 110px;
+    
 }
 
 .movie-info h3{
