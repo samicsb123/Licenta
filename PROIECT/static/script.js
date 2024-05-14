@@ -4,8 +4,76 @@ const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const popularMovies = BASE_URL + '/movie/popular?language=en-US&page=1' + API_KEY;
 const popularSeries = BASE_URL + '/tv/popular?language=en-US&page=1' + API_KEY;
 const main = document.getElementById('main');
+const API_URL_Movies = BASE_URL + '/discover/movie?sort_by_popularity.desc&' + API_KEY
+const API_URL_Series = BASE_URL + '/discover/tv?sort_by_popularity.desc&' + API_KEY
 
-const genres = [
+const genresSeries = [
+  {
+    "id": 10759,
+    "name": "Action & Adventure"
+  },
+  {
+    "id": 16,
+    "name": "Animation"
+  },
+  {
+    "id": 35,
+    "name": "Comedy"
+  },
+  {
+    "id": 80,
+    "name": "Crime"
+  },
+  {
+    "id": 99,
+    "name": "Documentary"
+  },
+  {
+    "id": 18,
+    "name": "Drama"
+  },
+  {
+    "id": 10751,
+    "name": "Family"
+  },
+  {
+    "id": 10762,
+    "name": "Kids"
+  },
+  {
+    "id": 9648,
+    "name": "Mystery"
+  },
+  {
+    "id": 10763,
+    "name": "News"
+  },
+  {
+    "id": 10764,
+    "name": "Reality"
+  },
+  {
+    "id": 10765,
+    "name": "Sci-Fi & Fantasy"
+  },
+  {
+    "id": 10766,
+    "name": "Soap"
+  },
+  {
+    "id": 10767,
+    "name": "Talk"
+  },
+  {
+    "id": 10768,
+    "name": "War & Politics"
+  },
+  {
+    "id": 37,
+    "name": "Western"
+  }
+]
+const genresMovies = [
     {
       "id": 28,
       "name": "Action"
@@ -66,10 +134,7 @@ const genres = [
       "id": 878,
       "name": "Science Fiction"
     },
-    {
-      "id": 10770,
-      "name": "TV Movie"
-    },
+
     {
       "id": 53,
       "name": "Thriller"
@@ -83,6 +148,92 @@ const genres = [
       "name": "Western"
     }
   ]
+var selectedGenre = []
+const tagsEl = document.getElementById('tags');
+
+  setGenre();
+
+  function setGenre(){
+    tagsEl.innerHTML = '';
+    if (document.title === 'OASIS - Movies'){
+      genres = genresMovies
+    }
+    else if (document.title === 'OASIS - Series'){
+      genres = genresSeries
+    }
+    genres.forEach(genres => {
+      const t = document.createElement('div');
+      t.classList.add('tag');
+      t.id=genres.id;
+      t.innerText = genres.name;
+      t.addEventListener('click', () => {
+        if(selectedGenre.length == 0){
+          selectedGenre.push(genres.id);
+        }else{
+          if(selectedGenre.includes(genres.id)){
+            selectedGenre.forEach((id,idx) => {
+              if(id == genres.id){
+                selectedGenre.splice(idx, 1);
+              }
+            })
+          }else{
+            selectedGenre.push(genres.id);
+          }
+        }
+        console.log(selectedGenre)
+        if (document.title === 'OASIS - Movies'){
+          getData(API_URL_Movies + '&with_genres=' + encodeURI(selectedGenre.join(',')))
+          highlightSelection()
+        }else if (document.title === 'OASIS - Series'){
+          getData(API_URL_Series + '&with_genres=' + encodeURI(selectedGenre.join(',')))
+          highlightSelection()
+        }
+        
+      })
+      tagsEl.append(t);
+    })
+  }
+
+  function highlightSelection() {
+    const tags = document.querySelectorAll('.tag');
+    tags.forEach(tag => {
+      tag.classList.remove('highlight')
+    })
+    clearBtn()
+    if(selectedGenre.length !=0){
+      selectedGenre.forEach(id => {
+        const hightlightedTag = document.getElementById(id);
+        hightlightedTag.classList.add('highlight');
+
+      })
+    }
+
+  }
+
+function clearBtn(){
+  let clearBtn=document.getElementById('clear');
+  if(clearBtn){
+    clearBtn.classList.add('highlight')
+  }else{
+    let clear = document.createElement('div');
+    clear.classList.add('tag','highlight');
+    clear.id = 'clear';
+    clear.innerText = 'Clear x';
+    clear.addEventListener('click', () => {
+      selectedGenre = [];
+      setGenre();
+      if (document.title === 'OASIS - Movies'){
+        getData(API_URL_Movies)
+      }
+      else if (document.title === 'OASIS - Series'){
+        getData(API_URL_Series)
+      }
+    })
+    tagsEl.append(clear);
+  }
+
+
+}
 
 
 function getData(url) {
@@ -90,7 +241,12 @@ function getData(url) {
         .then(res => res.json()) 
         .then(data => {
             console.log(data);
-            showMovies(data.results);
+            if(data.results.length !=0){
+              showMovies(data.results);
+            }else{
+              main.innerHTML=`<h1 class="no-results">No Results Found</h1>`
+            }
+            
         })
         .catch(error => console.error('Eroare în timpul cererii fetch:', error));
 }
@@ -102,7 +258,7 @@ function showMovies(data) {
         const title = item.title || item.name;
         const poster_path = item.poster_path;
         const vote_average = item.vote_average.toFixed(2);
-        const id = item.id; // Extragem id-ul filmului
+        const id = item.id; 
 
         const movieEl = document.createElement('div');
         movieEl.classList.add('movie');
@@ -110,7 +266,7 @@ function showMovies(data) {
         movieEl.setAttribute('data-id', id);
 
         movieEl.innerHTML = `
-            <img src="${IMG_URL + poster_path}" alt="${title}">
+            <img src="${poster_path? IMG_URL + poster_path: "http://via.placeholder.com/1080x1580"}" alt="${title}">
             <div class="movie-info">
                 <h3>${title}</h3>
                 <span class="${getColor(vote_average)}">${vote_average}</span>
@@ -124,12 +280,12 @@ function showMovies(data) {
     document.querySelectorAll('.movie').forEach(movieElement => {
         movieElement.addEventListener('click', function() {
             const movieId = this.getAttribute('data-id');
-            fetchMovieDetails(movieId);
+            fetchDetails(movieId);
         });
     });
 }
 
-function fetchMovieDetails(id) {
+function fetchDetails(id) {
     const movieDetailsURL = BASE_URL + '/movie/' + id + '?language=en-US&' + API_KEY;
     const seriesDetailsURL = BASE_URL + '/tv/' + id + '?language=en-US&' + API_KEY;
     if(document.title === 'OASIS - Movies'){
