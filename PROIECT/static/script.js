@@ -5,6 +5,85 @@ const popularMovies = BASE_URL + '/movie/popular?language=en-US&page=1' + API_KE
 const popularSeries = BASE_URL + '/tv/popular?language=en-US&page=1' + API_KEY;
 const main = document.getElementById('main');
 
+const genres = [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 99,
+      "name": "Documentary"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 36,
+      "name": "History"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 10402,
+      "name": "Music"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 10770,
+      "name": "TV Movie"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 10752,
+      "name": "War"
+    },
+    {
+      "id": 37,
+      "name": "Western"
+    }
+  ]
+
 
 function getData(url) {
     fetch(url)
@@ -91,20 +170,3 @@ if (document.title === 'OASIS - Movies') {
     getData(popularSeries);
 }
 
-const searchInput = document.getElementById('search-input');
-// document.addEventListener('DOMContentLoaded', function() {
-//     // Selectăm inputul de căutare după ce întregul document a fost încărcat
-//     const searchInput = document.querySelector('.search-input');
-
-//     // Adăugăm ascultătorul de evenimente doar dacă inputul de căutare există
-//     if (searchInput) {
-//         searchInput.addEventListener('keydown', function(event) {
-//             if (event.keyCode === 13) {
-//                 const searchTerm = searchInput.value.trim();
-//                 const formattedSearchTerm = searchTerm.split(' ').join('%20');
-//                 const searchURL = BASE_URL + "/search/multi?query=" + formattedSearchTerm + '&' + API_KEY;
-//                 getData(searchURL);
-//             }}
-//         }
-       
-//     }
