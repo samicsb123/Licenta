@@ -22,6 +22,12 @@ body {
     color: #ff4444; 
     height: 500px;
     z-index: 1;
+    /*background image repeat*/
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+    background-position: center;
+    background-repeat: repeat;
+    background-size: 4%;
+    /*background image repeat end*/
 }
 
 header {
