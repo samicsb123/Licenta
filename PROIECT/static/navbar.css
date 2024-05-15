@@ -131,3 +131,61 @@
 
 }
 
+/* Drop Down Menu NEW*/
+
+/* User profile or dropdown styles and hover styles starts */
+.fa-regular{
+    color: white;
+    font-size: 20px;
+    padding: 5px;
+    background-color: black;
+  }
+
+  .dropdown-menu.dropdown-menu-center {
+    left: 40% !important;
+    right: auto !important;
+    transform: translateX(-70%) !important;
+  }
+
+  .dropdown .btn:hover {
+    transform: scale(1.1);
+    }
+
+  .dropdown-item{
+    font-family: 'Arbutus Slab';
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  .dropdown-item:hover {
+    transform: scale(1.1);
+  }
+
+  .dropdown-divider {
+    border: none;
+    height: 2px;
+    background-color: #000;
+    margin: 0.5rem 0;
+    opacity: 0.5;
+  }
+/* User profile or dropdown styles and hover styles starts */  
+
+
+
+/* Media query styles for 576 px size user window starts */  
+  @media (max-width: 576px) {
+    .nav-item{
+        padding-left: 10%;
+    }
+
+    .dropdown{
+        padding-left: 8%;
+    }
+    
+    .dropdown-menu.dropdown-menu-center {
+      left: 30% !important;
+      right: 0 !important;
+      transform: translateX(0) !important;
+    }
+  }
+/* Media query styles for 576 px size user window ends */
