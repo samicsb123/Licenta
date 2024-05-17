@@ -34,6 +34,10 @@ header{
     font-size: 1rem;
     color:#fff;
     font-family: inherit;
+    width: 100%;
+}
+.search-form{
+    margin: 0;
 }
 
 .search:focus{

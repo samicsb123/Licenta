@@ -84,6 +84,7 @@
     color: rgb(177, 25, 25);
     font-weight: bold; 
     font-size: 24px;
+    margin-right: 20px;
 }
 
 .OASIS-button:hover{
@@ -109,8 +110,12 @@
     letter-spacing: 0.5px;
     font-family: 'Poppins',sans-serif;
     padding-right: 10px;
+    display: flex;
 }
+.text-navbar a{
+    height: 70px;
 
+}
 .text-navbar:hover{
     color: rgb(177, 25, 25);;
     text-decoration: none;
@@ -159,7 +164,7 @@
   }
 
   .dropdown-item:hover {
-    transform: scale(1.1);
+    background-color: gray;
   }
 
   .dropdown-divider {
