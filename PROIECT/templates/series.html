@@ -27,9 +27,7 @@
                 <a class="text-navbar" href="{{url_for('movies')}}">Movies</a>
             </div>
             
-            <div>
-                <a class="text-navbar" href="{{url_for('search')}}">Search</a>
-            </div>
+
         </div>
         <div class="separator separator-right">
 
@@ -53,7 +51,10 @@
 
     </div>
 
+    <form  id="form" autocomplete="off" class="search-form">
+        <input type="text" placeholder="Search" id="search" class="search">
         
+    </form>   
 
     </div>
     <div class="header-pag">

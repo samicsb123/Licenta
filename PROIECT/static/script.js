@@ -160,7 +160,7 @@ if (document.title === 'OASIS - Movies' || document.title === 'OASIS - Series'){
   setGenre();
 
   function setGenre(){
-    tagsEl.innerHTML = '';
+    tagsEl.innerHTML = ''; 
     if (document.title === 'OASIS - Movies'){
       genres = genresMovies
     }
@@ -200,6 +200,18 @@ if (document.title === 'OASIS - Movies' || document.title === 'OASIS - Series'){
     })
   }
 }
+//   form.addEventListener('submit', (e) => 
+//     e.preventDefault();
+
+//     const searchTerm = search.value;
+//     if(searchTerm) {
+        
+//         getData(searchURLmovies+'&query='+searchTerm)
+//         getData(searchURLseries+'&query='+searchTerm)
+    
+
+// })
+
 
   function highlightSelection() {
     const tags = document.querySelectorAll('.tag');

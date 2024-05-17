@@ -38,6 +38,7 @@ header{
     font-family: inherit;
     width: 101%;
     height: 80px;
+    opacity: 50%;
     
 }
 .search-form{
@@ -49,6 +50,7 @@ header{
 .search:focus{
     outline:0;
     background-color: rgb(14, 1, 22);
+    opacity: 100%;
 }
 
 .search::placeholder{
