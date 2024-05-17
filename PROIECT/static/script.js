@@ -6,6 +6,8 @@ const popularSeries = BASE_URL + '/tv/popular?language=en-US&page=1' + API_KEY;
 const main = document.getElementById('main');
 const API_URL_Movies = BASE_URL + '/discover/movie?sort_by_popularity.desc&' + API_KEY
 const API_URL_Series = BASE_URL + '/discover/tv?sort_by_popularity.desc&' + API_KEY
+const searchURLmovies = BASE_URL + '/search/movie?'+API_KEY;
+const searchURLseries = BASE_URL + '/search/tv?'+API_KEY;
 
 const genresSeries = [
   {
@@ -149,8 +151,12 @@ const genresMovies = [
     }
   ]
 var selectedGenre = []
+
+const form =  document.getElementById('form');
+const search = document.getElementById('search');
 const tagsEl = document.getElementById('tags');
 
+if (document.title === 'OASIS - Movies' || document.title === 'OASIS - Series'){
   setGenre();
 
   function setGenre(){
@@ -193,6 +199,7 @@ const tagsEl = document.getElementById('tags');
       tagsEl.append(t);
     })
   }
+}
 
   function highlightSelection() {
     const tags = document.querySelectorAll('.tag');
@@ -285,6 +292,8 @@ function showMovies(data) {
     });
 }
 
+
+
 function fetchDetails(id) {
     const movieDetailsURL = BASE_URL + '/movie/' + id + '?language=en-US&' + API_KEY;
     const seriesDetailsURL = BASE_URL + '/tv/' + id + '?language=en-US&' + API_KEY;
@@ -309,6 +318,9 @@ function fetchDetails(id) {
         
     }
 }
+
+
+
 
 function getColor(vote) {
     if (vote >= 8) {

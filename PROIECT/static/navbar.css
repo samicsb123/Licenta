@@ -47,23 +47,6 @@
 }
 
 
-.navbar .notification-icon,
-.navbar .profile-icon {
-    font-size: 24px; 
-    color: #fff; 
-    margin-right: 10px; 
-    padding-right: 20px;
-}
-
-
-.navbar .profile-icon {
-    width: 30px; 
-    height: 30px;
-    background-color: #fff; 
-    border-radius: 50%; 
-    margin-right: 5px; 
-    border: 0px;
-}
 
 
 .dropdown-menu {
@@ -81,14 +64,16 @@
 
 
 .OASIS-button{
-    color: rgb(177, 25, 25);
+    color: #FFFADE;
     font-weight: bold; 
+    text-decoration: none;
     font-size: 24px;
-    margin-right: 20px;
+    margin: 0px 20px;
+
 }
 
 .OASIS-button:hover{
-    color: rgb(177, 25, 25);
+    color: #FFFADE;
     font-weight: bold; 
     font-size: 24px;
     text-decoration: none;
@@ -103,7 +88,7 @@
 }
 
 .text-navbar{
-    color: rgb(177, 25, 25);
+    color: #FFFADE;
     position: relative;
     text-decoration: none;
     font-size: 24px;
@@ -117,14 +102,14 @@
 
 }
 .text-navbar:hover{
-    color: rgb(177, 25, 25);;
+    color: #FFFADE;
     text-decoration: none;
 }
 
 .text-navbar::after{
     content: "";
     position: absolute;
-    background-color: rgb(177, 25, 25);
+    background-color: #FFFADE;
     height: 3px;
     width: 0;
     left: 0;
@@ -141,7 +126,7 @@
 
 /* User profile or dropdown styles and hover styles starts */
 .fa-regular{
-    color: white;
+    color: #FFFADE;
     font-size: 20px;
     padding: 5px;
     background-color: black;
@@ -157,10 +142,15 @@
     transform: scale(1.1);
     }
 
+    .btn{
+        margin: 0px;
+    }
+
   .dropdown-item{
     font-family: 'Arbutus Slab';
     font-size: 14px;
     transition: all 0.3s ease;
+    
   }
 
   .dropdown-item:hover {

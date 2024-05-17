@@ -19,7 +19,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--primary-color); 
-    color: #ff4444; 
+    color: #FFFADE; 
     height: 500px;
     z-index: 1;
     /*background image repeat*/
@@ -90,11 +90,9 @@ input {
 }
 
 button {
-    width: 100%;
-    padding: 10px;
-    background-color: #e50914; /* roșu Netflix */
-    color: #fff; /* text alb */
-    border: none;
+    background-color: #00EFB7; /* roșu Netflix */
+    color: #0091A9; 
+    border-color: #00EFB7;
     border-radius: 5px;
     cursor: pointer;
     width: 100%; /* Lățime de 50% pentru buton */
@@ -104,7 +102,8 @@ button {
 }
 
 button:hover {
-    background-color: #ff3c47; 
+    border: 2px solid #C9FCE9;
+    transition: 0.1s;
 }
 .movie {
     cursor: pointer;
@@ -112,14 +111,24 @@ button:hover {
 
 
 .signup-text {
-    color:#e50914;
+    color:#FFFADE;
     text-align: center;
-    font-size: 14px; /* Dimensiune text mai mică */
-    margin-top: 10px; /* Separare între butonul de login și textul de sign up */
+    font-size: 14px; 
+    margin-top: 10px; 
+    
+    
 }
 
 .logo-img{
     height: 100px;
 }
 
-
+/* .text-link{
+    text-decoration: none;
+} */
+.text-link:hover{
+    text-decoration: underline;
+}
+.text-link:visited{
+    color: #FFFADE;
+}
