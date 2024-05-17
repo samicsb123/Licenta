@@ -89,6 +89,11 @@ def series():
     session.pop('logged_in', None)
     return render_template('series.html')
 
+@app.route('/search', methods=['GET','POST'])
+@login_required
+def search():
+    session.pop('logged_in', None)
+    return render_template('search.html')
 
 @app.route('/movies', methods=['GET','POST'])
 @login_required
