@@ -156,9 +156,39 @@ const form =  document.getElementById('form');
 const search = document.getElementById('search');
 const tagsEl = document.getElementById('tags');
 
-if (document.title === 'OASIS - Movies' || document.title === 'OASIS - Series'){
+if (document.title === 'OASIS - Movies' ){
   setGenre();
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
 
+    const searchTerm = search.value;
+    selectedGenre=[];
+    setGenre();
+    if(searchTerm) {
+        getData(searchURLmovies+'&query='+searchTerm)
+    }else{
+        getData(popularMovies);
+    }
+    search.value = '';
+    
+
+})}
+else if(document.title === 'OASIS - Series'){
+  setGenre();
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const searchTerm = search.value;
+    selectedGenre=[];
+    setGenre();
+    if(searchTerm) {
+        getData(searchURLseries+'&query='+searchTerm)
+    }else{
+        getData(popularSeries);
+    }
+    search.value = '';
+})
+}
   function setGenre(){
     tagsEl.innerHTML = ''; 
     if (document.title === 'OASIS - Movies'){
@@ -199,7 +229,7 @@ if (document.title === 'OASIS - Movies' || document.title === 'OASIS - Series'){
       tagsEl.append(t);
     })
   }
-}
+
 //   form.addEventListener('submit', (e) => 
 //     e.preventDefault();
 
