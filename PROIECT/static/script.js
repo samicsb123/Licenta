@@ -150,11 +150,57 @@ const genresMovies = [
       "name": "Western"
     }
   ]
+
+  const carsObject = [
+    {
+      "img": "https://images.pexels.com/photos/9784188/pexels-photo-9784188.jpeg?cs=srgb&dl=pexels-mathias-reding-9784188.jpg&fm=jpg",
+      "model" : "FERRARI 296 GTS",
+      "type" : "coupe"
+    },
+    {
+      "img": "https://images.pexels.com/photos/10292234/pexels-photo-10292234.jpeg?cs=srgb&dl=pexels-yoshi-10292234.jpg&fm=jpg",
+      "model" : "FERRARI SF90",
+      "type" : "coupe"
+    },
+    {
+      "img": "https://images.pexels.com/photos/11202306/pexels-photo-11202306.jpeg?cs=srgb&dl=pexels-prat-clement-11202306.jpg&fm=jpg",
+      "model" : "FERRARI F60 America",
+      "type" : "coupe"
+    },
+    {
+      "img": "https://images.pexels.com/photos/8171898/pexels-photo-8171898.jpeg?cs=srgb&dl=pexels-eriks-abzinovs-8171898.jpg&fm=jpg",
+      "model" : "FERRARI F8",
+      "type" : "hatchback"
+    },
+    {
+      "img": "https://images.pexels.com/photos/10292234/pexels-photo-10292234.jpeg?cs=srgb&dl=pexels-yoshi-10292234.jpg&fm=jpg",
+      "model" : "FERRARI SF90",
+      "type" : "coupe"
+    },
+    {
+      "img": "https://images.pexels.com/photos/8171898/pexels-photo-8171898.jpeg?cs=srgb&dl=pexels-eriks-abzinovs-8171898.jpg&fm=jpg",
+      "model" : "FERRARI F8",
+      "type" : "hatchback"
+    },
+    {
+      "img": "https://images.pexels.com/photos/9784188/pexels-photo-9784188.jpeg?cs=srgb&dl=pexels-mathias-reding-9784188.jpg&fm=jpg",
+      "model" : "FERRARI 296 GTS",
+      "type" : "coupe"
+    },
+    {
+      "img": "https://images.pexels.com/photos/8171898/pexels-photo-8171898.jpeg?cs=srgb&dl=pexels-eriks-abzinovs-8171898.jpg&fm=jpg",
+      "model" : "FERRARI F8",
+      "type" : "hatchback"
+    }
+  ];
+
 var selectedGenre = []
 
 const form =  document.getElementById('form');
 const search = document.getElementById('search');
 const tagsEl = document.getElementById('tags');
+const slider = document.querySelector(".slider");
+
 
 if (document.title === 'OASIS - Movies' ){
   setGenre();
@@ -188,6 +234,37 @@ else if(document.title === 'OASIS - Series'){
     }
     search.value = '';
 })
+}
+else if(document.title === 'OASIS - Home'){
+  window.addEventListener("load", initializeSlider());
+
+function initializeSlider(){
+  let cars = "";
+  for(let car in carsObject){
+    cars += `<div class="slide">
+              <img src="${carsObject[car].img}"
+                alt="image">
+              <br><br>
+              <!--<div>
+                <h3>${carsObject[car].model}</h3>
+                <p>${carsObject[car].type}</p>
+              </div>-->
+            </div>`
+  }
+  slider.innerHTML = cars;
+}
+
+const tnslider = tns({
+  container: '.slider',
+  autoWidth:true,
+  gutter: 15,
+  slideBy: 4,
+  nav: true,
+  speed: 400,
+  controlsContainer: '#controls',
+  prevButton: '.previous',
+  nextButton: '.next'
+});
 }
   function setGenre(){
     tagsEl.innerHTML = ''; 
