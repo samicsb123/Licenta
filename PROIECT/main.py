@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from models import init_app_and_db, User, db
+from models import init_app_and_db, User, Movie, db
 from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
@@ -30,6 +30,7 @@ def check_login(email, password):
 def index():
     return render_template('login.html')
 
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
@@ -48,6 +49,7 @@ def login():
             return redirect(url_for('home'))
         else:
             return render_template('login.html')
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -76,10 +78,12 @@ def signup():
 
     return render_template('signup.html')
 
+
 @app.route('/home')
 @login_required
 def home():
     return render_template('home.html', name=current_user.name)
+
 
 @app.route('/logout', methods=['GET','POST'])
 @login_required
@@ -89,11 +93,12 @@ def logout():
     flash('You were successfully logged out!', 'success')
     return redirect(url_for('index'))
 
+
 @app.route('/series', methods=['GET','POST'])
 @login_required
 def series():
     session.pop('logged_in', None)
-    return render_template('series.html', name=current_user.name)
+    return render_template('series.html')
 
 
 @app.route('/movies', methods=['GET','POST'])
@@ -103,8 +108,43 @@ def movies():
     return render_template('movies.html')
 
 
+@app.route('/watchlist', methods=['GET'])
+@login_required
+def watchlist():
+    watchlist_movies = Movie.query.filter_by(user_id=current_user.id).all()
+    return render_template('watchlist.html', movies=watchlist_movies)
 
+
+@app.route('/toggle_watchlist', methods=['POST'])
+@login_required
+def toggle_watchlist():
+    data = request.get_json()
+    print(data)  # Pentru debug, vezi ce date primești
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+
+    movie_id = data.get('movieId')
+    movie_title = data.get('title')
+    movie_poster = data.get('poster_path')
+
+    if not movie_id or not movie_title:
+        return jsonify({'error': 'Invalid movie data'}), 400
+
+    movie = Movie.query.filter_by(id=movie_id, user_id=current_user.id).first()
+
+    if movie:
+        db.session.delete(movie)
+        db.session.commit()
+        return jsonify({'message': 'Removed from watchlist'}), 200
+    else:
+        new_movie = Movie(
+            id=movie_id,
+            title=movie_title,
+            poster_path=movie_poster,
+            user_id=current_user.id
+        )
+        db.session.add(new_movie)
+        db.session.commit()
+        return jsonify({'message': 'Added to watchlist'}), 200
 if __name__ == '__main__':
     app.run(debug=True)
-
-

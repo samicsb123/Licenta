@@ -215,8 +215,7 @@ if (document.title === 'OASIS - Movies' ){
     }else{
         getData(popularMovies);
     }
-    search.value = '';
-    
+    search.value = '';   
 
 })}
 else if(document.title === 'OASIS - Series'){
@@ -253,7 +252,6 @@ function initializeSlider(){
   }
   slider.innerHTML = cars;
 }
-
 const tnslider = tns({
   container: '.slider',
   autoWidth:true,
@@ -307,19 +305,6 @@ const tnslider = tns({
     })
   }
 
-//   form.addEventListener('submit', (e) => 
-//     e.preventDefault();
-
-//     const searchTerm = search.value;
-//     if(searchTerm) {
-        
-//         getData(searchURLmovies+'&query='+searchTerm)
-//         getData(searchURLseries+'&query='+searchTerm)
-    
-
-// })
-
-
   function highlightSelection() {
     const tags = document.querySelectorAll('.tag');
     tags.forEach(tag => {
@@ -357,11 +342,7 @@ function clearBtn(){
     })
     tagsEl.append(clear);
   }
-
-
 }
-
-
 function getData(url) {
     fetch(url)
         .then(res => res.json()) 
@@ -375,6 +356,38 @@ function getData(url) {
             
         })
         .catch(error => console.error('Eroare în timpul cererii fetch:', error));
+}
+function toggleWatchlist(button) {
+  const movieId = button.getAttribute('data-id');
+  const title = button.getAttribute('data-title');
+  const poster_path = button.getAttribute('data-poster_path');
+  const isAdded = button.textContent === '-';
+
+  fetch('/toggle_watchlist', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ movieId, title, poster_path })
+  })
+  .then(response => {
+      if (!response.ok) {
+          return response.json().then(data => {
+              throw new Error(data.error);
+          });
+      }
+      return response.json();
+  })
+  .then(data => {
+      if (isAdded) {
+          button.parentElement.parentElement.remove();
+      } else {
+          button.textContent = '-';
+      }
+  })
+  .catch(error => {
+      console.error('Error:', error.message);
+  });
 }
 
 function showMovies(data) {
@@ -397,6 +410,7 @@ function showMovies(data) {
                 <h3>${title}</h3>
                 <span class="${getColor(vote_average)}">${vote_average}</span>
             </div>
+            <button class="watchlist-btn" data-id="${id}" onclick="toggleWatchlist(this)">+</button>
         `;
 
         main.appendChild(movieEl);
@@ -410,8 +424,6 @@ function showMovies(data) {
         });
     });
 }
-
-
 
 function fetchDetails(id) {
     const movieDetailsURL = BASE_URL + '/movie/' + id + '?language=en-US&' + API_KEY;
@@ -437,9 +449,6 @@ function fetchDetails(id) {
         
     }
 }
-
-
-
 
 function getColor(vote) {
     if (vote >= 8) {

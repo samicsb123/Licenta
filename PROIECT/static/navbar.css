@@ -94,8 +94,9 @@
     font-size: 24px;
     letter-spacing: 0.5px;
     font-family: 'Poppins',sans-serif;
-    padding-right: 10px;
+    padding-right: 15px;
     display: flex;
+    
 }
 .text-navbar a{
     height: 70px;
@@ -113,12 +114,13 @@
     height: 3px;
     width: 0;
     left: 0;
+    right: 10px;
     bottom: -3px;
     transition: 0.3s;
 }
 
 .text-navbar:hover::after{
-    width: 100%;
+    width: 90%;
 
 }
 
