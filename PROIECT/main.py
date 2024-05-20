@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from models import init_app_and_db, User, db
 from flask_bcrypt import Bcrypt
 
@@ -79,7 +79,7 @@ def signup():
 @app.route('/home')
 @login_required
 def home():
-    return render_template('home.html')
+    return render_template('home.html', name=current_user.name)
 
 @app.route('/logout', methods=['GET','POST'])
 @login_required
@@ -93,7 +93,7 @@ def logout():
 @login_required
 def series():
     session.pop('logged_in', None)
-    return render_template('series.html')
+    return render_template('series.html', name=current_user.name)
 
 
 @app.route('/movies', methods=['GET','POST'])
