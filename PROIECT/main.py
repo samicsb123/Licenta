@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_login import LoginManager, login_user, logout_user, login_required
 from models import init_app_and_db, User, db
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
+
 app.secret_key = 'Drivqsy12'
 
+bcrypt = Bcrypt(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
@@ -61,8 +64,10 @@ def signup():
         if existing_user:
             flash('Acest email este deja înregistrat! Utilizați un alt email.', 'error')
             return render_template('signup.html', error_message='Acest email este deja înregistrat! Utilizați un alt email.')
+        
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-        new_user = User(email=email, name=name, password=password)
+        new_user = User(email=email, name=name, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
         flash('Contul a fost creat cu succes! Vă puteți autentifica acum.', 'success')
