@@ -21,8 +21,9 @@ def load_user(user_id):
 
 
 def check_login(email, password):
-    user = User.query.filter_by(email=email, password=password).first()
-    return user
+    user = User.query.filter_by(email=email).first()
+    if user and bcrypt.check_password_hash(user.password, password):
+        return user
 
 
 @app.route('/')
