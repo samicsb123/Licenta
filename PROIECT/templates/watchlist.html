@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="static/slider.css">
     <link rel="stylesheet" href="static/navbar.css">
     <link rel="stylesheet" href="static/home.css">
+    
 </head>
 <body>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -51,10 +52,11 @@
         {% for movie in movies %}
         <div class="movie" data-id="{{ movie.id }}" data-title="{{ movie.title }}">
             <img src="{{ movie.poster_path if movie.poster_path else 'http://via.placeholder.com/1080x1580' }}" alt="{{ movie.title }}">
+            <button class="watchlist-btn" onclick="toggleWatchlist(this)">-</button>
             <div class="movie-info">
                 <h3>{{ movie.title }}</h3>
-                <button class="watchlist-btn" 
-                        onclick="toggleWatchlist(this)">-</button>
+                <span class="rating">{{ movie.average_note }}</span>
+                
             </div>
         </div>
         {% endfor %}

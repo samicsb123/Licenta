@@ -4,7 +4,7 @@
 
 :root{
     --primary-color:#22254b;
-    --secondary-color: #373b69;
+    --secondary-color: #4A4A74;
 }
 
 
@@ -36,7 +36,7 @@ header {
     padding: 20px;
     text-align: center;
 }
-
+ 
 
 
 main {
