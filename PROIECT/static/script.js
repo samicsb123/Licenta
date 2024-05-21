@@ -420,9 +420,6 @@ function toggleWatchlist(button) {
       } else {
           console.log(data.message);
           button.innerHTML = button.innerHTML === '+' ? '-' : '+';
-          if (data.message.includes('Removed')) {
-              movieElement.remove(); // Scoatem filmul din DOM
-          }
           let message = data.message.includes('Added') ? "Added to watchlist" : "Removed from watchlist";
           let backgroundColor = data.message.includes('Added') ? "linear-gradient(to right, #00b09b, #96c93d)" : "linear-gradient(to right, #ff5f6d, #ffc371)";
 
@@ -433,13 +430,19 @@ function toggleWatchlist(button) {
               position: 'left',
               backgroundColor: backgroundColor,
           }).showToast();
+
+          if (document.location.pathname === "/watchlist") {
+              // Eliminăm elementul din DOM doar dacă suntem în pagina watchlist.html
+              if (data.message.includes('Removed')) {
+                  movieElement.remove();
+              }
+          }
       }
   })
   .catch(error => {
       console.error('Error:', error);
   });
 }
-
 
 
 
