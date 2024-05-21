@@ -140,13 +140,14 @@ main{
 
 .watchlist-btn {
     position: absolute;
-    top: 5%;
-    left: 90%;
+    top: 4%;
+    left: 92%;
+    height: 35px;
     transform: translate(-50%, -50%);
     background-color: #4A4A74;
     color: #0091A9;
-    font-size: 12px; /* Dimensiunea textului */
-    padding: 8px 16px; 
+    font-size: 24px; /* Dimensiunea textului */
+    padding: 0px 10px; 
     border: none;
     cursor: pointer;
     border-radius: 3px; 
