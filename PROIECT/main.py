@@ -135,6 +135,7 @@ def toggle_watchlist():
     movie_id = data.get('movieId')
     movie_title = data.get('title')
     movie_poster = data.get('poster_path')
+    movie_type = data.get('type')
 
     if not movie_id or not movie_title:
         return jsonify({'error': 'Invalid movie data'}), 400
@@ -150,7 +151,8 @@ def toggle_watchlist():
             id=movie_id,
             title=movie_title,
             poster_path=movie_poster,
-            user_id=current_user.id
+            user_id=current_user.id,
+            type=movie_type
         )
         db.session.add(new_movie)
         db.session.commit()

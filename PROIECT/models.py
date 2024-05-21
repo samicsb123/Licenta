@@ -1,5 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+from flask_migrate import Migrate
+
+
 
 db = SQLAlchemy()
 
@@ -31,6 +34,9 @@ class Movie(db.Model):
     poster_path = db.Column(db.String(250), nullable=True)
     vote_average = db.Column(db.Float, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    type = db.Column(db.String(50), nullable=False) 
+
+
 
 def init_app_and_db(app):
     # Configurăm baza de date
@@ -41,3 +47,5 @@ def init_app_and_db(app):
 
     with app.app_context():
         db.create_all()
+
+

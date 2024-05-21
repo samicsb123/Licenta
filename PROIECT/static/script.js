@@ -401,6 +401,14 @@ function toggleWatchlist(button) {
   const movieId = movieElement.getAttribute('data-id');
   const title = movieElement.getAttribute('data-title');
   const posterPath = movieElement.querySelector('img').getAttribute('src');
+  let type;
+  if (document.title === 'OASIS - Movies') {
+      type = "movie";
+  } else if (document.title === 'OASIS - Series') {
+      type = "serie";
+  }
+
+  
 
   fetch('/toggle_watchlist', {
       method: 'POST',
@@ -410,7 +418,8 @@ function toggleWatchlist(button) {
       body: JSON.stringify({
           movieId: movieId,
           title: title,
-          poster_path: posterPath
+          poster_path: posterPath,
+          type: type
       })
   })
   .then(response => response.json())
