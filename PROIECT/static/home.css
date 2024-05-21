@@ -89,6 +89,7 @@ main{
     position:relative;
     overflow: hidden;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .movie:hover{
@@ -135,6 +136,8 @@ main{
 }
 
 
+
+
 .watchlist-btn {
     position: absolute;
     top: 5%;
@@ -168,6 +171,7 @@ main{
     display:inline-block;
     cursor: pointer;
 }
+
 
 .tag.highlight{
     background-color: #C9FCE9;

@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from models import init_app_and_db, User, Movie, db
 from flask_bcrypt import Bcrypt
+import re
 
 app = Flask(__name__)
 
@@ -51,6 +52,8 @@ def login():
             return render_template('login.html')
 
 
+import re
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -58,6 +61,11 @@ def signup():
         name = request.form.get('name')
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
+
+        # Verifică dacă parola respectă criteriile
+        if not re.match(r"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$", password):
+            flash('Parola trebuie să conțină cel puțin 6 caractere, o majusculă, un număr și un caracter special.', 'error')
+            return render_template('signup.html', error_message='Parola trebuie să conțină cel puțin 6 caractere, o majusculă, un număr și un caracter special.')
 
         if password != confirm_password:
             flash('Parolele nu se potrivesc! Încercați din nou.', 'error')
@@ -77,6 +85,7 @@ def signup():
         return redirect(url_for('index'))
 
     return render_template('signup.html')
+
 
 
 @app.route('/home')

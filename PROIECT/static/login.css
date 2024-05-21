@@ -60,17 +60,18 @@ section {
     align-items: center; 
 
 }
-#error {
-    background-color: #ff4444; /* roșu */
-    color: #fff; /* text alb */
+.error {
+    background-color: #ff4444; 
+    color: #FFFADE; 
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 5px;
+    text-align: center;
 }
 
 form {
     margin-top: 20px;
-    width: 100%; /* Lățime de 100% pentru a se potrivi containerului */
+    width: 100%; 
 }
 
 
@@ -90,23 +91,20 @@ input {
 }
 
 button {
-    background-color: #00EFB7; /* roșu Netflix */
+    background-color: #00EFB7;
     color: #0091A9; 
     border-color: #00EFB7;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%; /* Lățime de 50% pentru buton */
+    width: 100%; 
     padding: 10px;
-    margin-top: 10px; /* Separare între textbox-uri și buton */
+    margin-top: 10px; 
     align-items: center;
 }
 
 button:hover {
     border: 2px solid #C9FCE9;
     transition: 0.1s;
-}
-.movie {
-    cursor: pointer;
 }
 
 
@@ -115,17 +113,8 @@ button:hover {
     text-align: center;
     font-size: 14px; 
     margin-top: 10px; 
-    
-    
 }
 
-.logo-img{
-    height: 100px;
-}
-
-/* .text-link{
-    text-decoration: none;
-} */
 .text-link:hover{
     text-decoration: underline;
 }
