@@ -146,5 +146,6 @@ def toggle_watchlist():
         db.session.add(new_movie)
         db.session.commit()
         return jsonify({'message': 'Added to watchlist'}), 200
+
 if __name__ == '__main__':
     app.run(debug=True)

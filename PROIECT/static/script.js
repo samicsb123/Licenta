@@ -357,73 +357,85 @@ function getData(url) {
         })
         .catch(error => console.error('Eroare în timpul cererii fetch:', error));
 }
-function toggleWatchlist(button) {
-  const movieId = button.getAttribute('data-id');
-  const title = button.getAttribute('data-title');
-  const poster_path = button.getAttribute('data-poster_path');
-  const isAdded = button.textContent === '-';
-
-  fetch('/toggle_watchlist', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ movieId, title, poster_path })
-  })
-  .then(response => {
-      if (!response.ok) {
-          return response.json().then(data => {
-              throw new Error(data.error);
-          });
-      }
-      return response.json();
-  })
-  .then(data => {
-      if (isAdded) {
-          button.parentElement.parentElement.remove();
-      } else {
-          button.textContent = '-';
-      }
-  })
-  .catch(error => {
-      console.error('Error:', error.message);
-  });
-}
-
 function showMovies(data) {
-    main.innerHTML = '';
+  main.innerHTML = '';
 
-    data.forEach(item => {
-        const title = item.title || item.name;
-        const poster_path = item.poster_path;
-        const vote_average = item.vote_average.toFixed(2);
-        const id = item.id; 
+  data.forEach(item => {
+      const title = item.title || item.name;
+      const poster_path = item.poster_path;
+      const vote_average = item.vote_average.toFixed(2);
+      const id = item.id;
 
-        const movieEl = document.createElement('div');
-        movieEl.classList.add('movie');
-        movieEl.setAttribute('data-title', title);
-        movieEl.setAttribute('data-id', id);
+      const movieEl = document.createElement('div');
+      movieEl.classList.add('movie');
+      movieEl.setAttribute('data-title', title);
+      movieEl.setAttribute('data-id', id);
 
-        movieEl.innerHTML = `
-            <img src="${poster_path? IMG_URL + poster_path: "http://via.placeholder.com/1080x1580"}" alt="${title}">
-            <div class="movie-info">
-                <h3>${title}</h3>
-                <span class="${getColor(vote_average)}">${vote_average}</span>
-            </div>
-            <button class="watchlist-btn" data-id="${id}" onclick="toggleWatchlist(this)">+</button>
-        `;
+      movieEl.innerHTML = `
+          <img src="${poster_path ? IMG_URL + poster_path : "http://via.placeholder.com/1080x1580"}" alt="${title}">
+          <div class="movie-info">
+              <h3>${title}</h3>
+              <span class="${getColor(vote_average)}">${vote_average}</span>
+          </div>
+          <button class="watchlist-btn" onclick="toggleWatchlist(this)">+</button>
+      `;
 
-        main.appendChild(movieEl);
-    });
+      main.appendChild(movieEl);
+  });
 
-    // Adăugăm un event listener pentru fiecare element .movie
-    document.querySelectorAll('.movie').forEach(movieElement => {
+      // Adăugăm un event listener pentru fiecare element .movie
+      document.querySelectorAll('.movie').forEach(movieElement => {
         movieElement.addEventListener('click', function() {
             const movieId = this.getAttribute('data-id');
             fetchDetails(movieId);
         });
     });
 }
+
+function toggleWatchlist(button) {
+  const movieElement = button.closest('.movie');
+  const movieId = movieElement.getAttribute('data-id');
+  const title = movieElement.getAttribute('data-title');
+  const posterPath = movieElement.querySelector('img').getAttribute('src');
+
+  fetch('/toggle_watchlist', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          movieId: movieId,
+          title: title,
+          poster_path: posterPath
+      })
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.error) {
+          console.error('Error:', data.error);
+      } else {
+          console.log(data.message);
+          button.innerHTML = button.innerHTML === '+' ? '-' : '+';
+          let message = data.message.includes('Added') ? "Added to watchlist" : "Removed from watchlist";
+          let backgroundColor = data.message.includes('Added') ? "linear-gradient(to right, #00b09b, #96c93d)" : "linear-gradient(to right, #ff5f6d, #ffc371)";
+
+          Toastify({
+              text: message,
+              duration: 3000, // Durata notificării în milisecunde
+              gravity: "top", // Poziționarea notificării (top, bottom)
+              position: 'left', // Poziționarea orizontală a notificării (left, center, right)
+              backgroundColor: backgroundColor, // Culoarea de fundal a notificării
+          }).showToast();
+      }
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
+}
+
+
+
+
 
 function fetchDetails(id) {
     const movieDetailsURL = BASE_URL + '/movie/' + id + '?language=en-US&' + API_KEY;
