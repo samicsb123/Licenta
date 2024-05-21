@@ -420,15 +420,18 @@ function toggleWatchlist(button) {
       } else {
           console.log(data.message);
           button.innerHTML = button.innerHTML === '+' ? '-' : '+';
+          if (data.message.includes('Removed')) {
+              movieElement.remove(); // Scoatem filmul din DOM
+          }
           let message = data.message.includes('Added') ? "Added to watchlist" : "Removed from watchlist";
           let backgroundColor = data.message.includes('Added') ? "linear-gradient(to right, #00b09b, #96c93d)" : "linear-gradient(to right, #ff5f6d, #ffc371)";
 
           Toastify({
               text: message,
-              duration: 3000, // Durata notificării în milisecunde
-              gravity: "top", // Poziționarea notificării (top, bottom)
-              position: 'left', // Poziționarea orizontală a notificării (left, center, right)
-              backgroundColor: backgroundColor, // Culoarea de fundal a notificării
+              duration: 3000,
+              gravity: "top",
+              position: 'left',
+              backgroundColor: backgroundColor,
           }).showToast();
       }
   })
@@ -436,6 +439,7 @@ function toggleWatchlist(button) {
       console.error('Error:', error);
   });
 }
+
 
 
 
