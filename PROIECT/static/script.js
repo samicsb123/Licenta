@@ -344,20 +344,23 @@ function clearBtn(){
   }
 }
 function getData(url) {
-    fetch(url)
-        .then(res => res.json()) 
-        .then(data => {
-            console.log(data);
-            if(data.results.length !=0){
-              showMovies(data.results);
-            }else{
-              main.innerHTML=`<h1 class="no-results">No Results Found</h1>`
-            }
-            
-        })
-        .catch(error => console.error('Eroare în timpul cererii fetch:', error));
+  fetch(url)
+      .then(res => res.json())
+      .then(data => {
+          if (data.results.length != 0) {
+              fetch('/get_watchlist')
+                  .then(res => res.json())
+                  .then(watchlist => {
+                      showMovies(data.results, watchlist);
+                  });
+          } else {
+              main.innerHTML = `<h1 class="no-results">No Results Found</h1>`;
+          }
+      })
+      .catch(error => console.error('Eroare în timpul cererii fetch:', error));
 }
-function showMovies(data) {
+
+function showMovies(data, watchlist) {
   main.innerHTML = '';
 
   data.forEach(item => {
@@ -371,27 +374,28 @@ function showMovies(data) {
       movieEl.setAttribute('data-title', title);
       movieEl.setAttribute('data-id', id);
 
+      const watchlistBtnText = watchlist.includes(id) ? '-' : '+';
+
       movieEl.innerHTML = `
           <img src="${poster_path ? IMG_URL + poster_path : "http://via.placeholder.com/1080x1580"}" alt="${title}">
           <div class="movie-info">
               <h3>${title}</h3>
               <span class="${getColor(vote_average)}">${vote_average}</span>
           </div>
-          <button class="watchlist-btn" onclick="toggleWatchlist(this)">+</button>
+          <button class="watchlist-btn" onclick="toggleWatchlist(this)">${watchlistBtnText}</button>
       `;
 
       main.appendChild(movieEl);
   });
 
-      // Adăugăm un event listener pentru fiecare element .movie
-      document.querySelectorAll('.movie').forEach(movieElement => {
-        movieElement.addEventListener('click', function() {
-            const movieId = this.getAttribute('data-id');
-            fetchDetails(movieId);
-        });
-    });
+  // Adăugăm un event listener pentru fiecare element .movie
+  document.querySelectorAll('.movie').forEach(movieElement => {
+      movieElement.addEventListener('click', function() {
+          const movieId = this.getAttribute('data-id');
+          fetchDetails(movieId);
+      });
+  });
 }
-
 function toggleWatchlist(button) {
   const movieElement = button.closest('.movie');
   const movieId = movieElement.getAttribute('data-id');

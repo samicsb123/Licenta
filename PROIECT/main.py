@@ -146,6 +146,13 @@ def toggle_watchlist():
         db.session.add(new_movie)
         db.session.commit()
         return jsonify({'message': 'Added to watchlist'}), 200
+    
 
+@app.route('/get_watchlist', methods=['GET'])
+@login_required
+def get_watchlist():
+    watchlist_movies = Movie.query.filter_by(user_id=current_user.id).all()
+    watchlist_ids = [movie.id for movie in watchlist_movies]
+    return jsonify(watchlist_ids)
 if __name__ == '__main__':
     app.run(debug=True)
